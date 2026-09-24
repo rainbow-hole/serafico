@@ -61,22 +61,22 @@
 
     <main class="pagina">
 
-        <img
-            class="imagem-principal"
-            src="./Casal"
-            alt="Imagem principal"
-        >
+    <img
+        class="imagem-principal"
+        id="imagem-casal"
+        alt="Imagem principal"
+    >
 
-        <p class="texto">
+    <p class="texto">
         Eu imagino o quão surpreso você está, queria ser uma mosquinha nessas horas.
         De qualquer forma, boa sorte, meu anjo.
-        </p>
+    </p>
 
-        <audio id="musica" autoplay loop>
-            <source src="From Eden.mp3" type="audio/mpeg">
-        </audio>
+    <audio id="musica" autoplay loop>
+        <source src="From Eden.mp3" type="audio/mpeg">
+    </audio>
 
-    </main>
+</main>
     
     <span class="hidden">poliglota</span>
         
@@ -95,15 +95,27 @@
     document.addEventListener("touchstart", iniciarMusica, { once: true });
     document.addEventListener("keydown", iniciarMusica, { once: true });
 
+
     fetch("Casal")
-        .then(resposta => resposta.arrayBuffer())
+        .then(resposta => {
+            if (!resposta.ok) {
+                throw new Error("Não foi possível carregar Casal");
+            }
+
+            return resposta.arrayBuffer();
+        })
         .then(dados => {
-            const arquivo = new Blob([dados], { type: "image/png" });
+            const arquivo = new Blob([dados], {
+                type: "image/png"
+            });
+
             const imagem = document.getElementById("imagem-casal");
 
             imagem.src = URL.createObjectURL(arquivo);
         })
-        .catch(() => {});
+        .catch(erro => {
+            console.error("Erro ao carregar a imagem:", erro);
+        });
 </script>
 </body>
 </html>
