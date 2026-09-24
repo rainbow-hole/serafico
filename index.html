@@ -81,20 +81,29 @@
     <span class="hidden">poliglota</span>
         
     <script>
-        const musica = document.getElementById("musica");
+    const musica = document.getElementById("musica");
 
-        musica.volume = 1.0;
+    musica.volume = 1.0;
 
-        function iniciarMusica() {
-            musica.play().catch(() => {});
-        }
+    function iniciarMusica() {
+        musica.play().catch(() => {});
+    }
 
-        iniciarMusica();
+    iniciarMusica();
 
-        document.addEventListener("click", iniciarMusica, { once: true });
-        document.addEventListener("touchstart", iniciarMusica, { once: true });
-        document.addEventListener("keydown", iniciarMusica, { once: true });
-    </script>
+    document.addEventListener("click", iniciarMusica, { once: true });
+    document.addEventListener("touchstart", iniciarMusica, { once: true });
+    document.addEventListener("keydown", iniciarMusica, { once: true });
 
+    fetch("Casal")
+        .then(resposta => resposta.arrayBuffer())
+        .then(dados => {
+            const arquivo = new Blob([dados], { type: "image/png" });
+            const imagem = document.getElementById("imagem-casal");
+
+            imagem.src = URL.createObjectURL(arquivo);
+        })
+        .catch(() => {});
+</script>
 </body>
 </html>
