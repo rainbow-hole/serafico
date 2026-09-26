@@ -88,7 +88,7 @@
     
     <span class="hidden">poliglota</span>
         
-    <script>
+  <script>
     const musica = document.getElementById("musica");
 
     musica.volume = 1.0;
@@ -102,28 +102,6 @@
     document.addEventListener("click", iniciarMusica, { once: true });
     document.addEventListener("touchstart", iniciarMusica, { once: true });
     document.addEventListener("keydown", iniciarMusica, { once: true });
-
-
-    fetch("Casal")
-        .then(resposta => {
-            if (!resposta.ok) {
-                throw new Error("Não foi possível carregar Casal");
-            }
-
-            return resposta.arrayBuffer();
-        })
-        .then(dados => {
-            const arquivo = new Blob([dados], {
-                type: "image/png"
-            });
-
-            const imagem = document.getElementById("imagem-casal");
-
-            imagem.src = URL.createObjectURL(arquivo);
-        })
-        .catch(erro => {
-            console.error("Erro ao carregar a imagem:", erro);
-        });
 </script>
 </body>
 </html>
